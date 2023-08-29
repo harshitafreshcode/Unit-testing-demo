@@ -45,7 +45,6 @@ export const createUser = (req: Request, res: Response): any => {
 export const getAllUser = (req: Request, res: Response): any => {
     try {
         let where: object = { id: req.body?.id };
-
         FindAllUser(where, (err: any, data: any, count: number) => {
             if (err) {
                 return ErrorResponse(res, err);

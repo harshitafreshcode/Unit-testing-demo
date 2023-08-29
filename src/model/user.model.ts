@@ -30,7 +30,7 @@ export async function addUser(where: any, data: any, callback: any) {
         //     }).catch((err) => {
         //         callback(err, '')
         //     });
-
+        
         let user = await AppDataSource.manager.save(User, res)
         console.log(user, 'user');
         callback('', user)
@@ -91,21 +91,23 @@ export async function updateUser(where: any, data: any, callback: any) {
 export async function FindAllUser(where: any, callback: any) {
     try {
         const userId = 1;
-
+        
         const userRepository = AppDataSource.getRepository(User);
-
+        console.log('********************');
+        
         const [usersList, count] = await userRepository
-            .createQueryBuilder('user')
-            // .innerJoin('user.module', 'module')
-            // .innerJoin('module.modulePermissions', 'modulePermission')
+        .createQueryBuilder('user')
+        // .innerJoin('user.module', 'module')
+        // .innerJoin('module.modulePermissions', 'modulePermission')
             // .innerJoin('modulePermission.permission', 'permission')
             // .innerJoin('permission.roles', 'role')
             // .innerJoin('role.users', 'user')
             // .where('user.id = :userId', { userId })
             .getManyAndCount();
-        return callback('', usersList, count)
-
-    } catch (error: any) {
+            console.log('+++++++++++++');
+            return callback('', usersList, count)
+            
+        } catch (error: any) {
         console.log(error);
         return callback(error, '')
     }
